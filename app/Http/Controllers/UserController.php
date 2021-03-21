@@ -100,7 +100,7 @@ class UserController extends Controller
                                          ->where('social_name', $driver)->first();
 
         if(!$social_profile){
-            
+            dd("insdie");
             $user = User::where('email', $userSocialite->getEmail())->firts();
             dd($user);
             if(!$user){
