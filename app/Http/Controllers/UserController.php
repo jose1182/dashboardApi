@@ -111,13 +111,15 @@ class UserController extends Controller
                     'password' => Hash::make('password'),
                 ]);
             }
-            dd($user);
-            SocialProfile::create([
-                'user_id' -> $user->id,
-                'social_id' -> $userSocialite->getId(),
-                'social_name' -> $driver,
-                'social_avatar' -> $userSocialite->getAvatar()
-            ]);                
+
+            $social_profile = SocialProfile::create([
+                'user_id' => $user->id,
+                'social_id' => $userSocialite->getId(),
+                'social_name' => $driver,
+                'social_avatar'  => $userSocialite->getAvatar()
+            ]);      
+            
+            dd($social_profile);
         }
 
         $token = JWTAuth::fromUser($social_profile->user);
