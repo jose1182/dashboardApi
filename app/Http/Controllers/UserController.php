@@ -88,16 +88,14 @@ class UserController extends Controller
 
     //Obtain user information from socialize
     public function handleProviderCallback(Request $request, $driver){
-        return('test');
 
         if($request->get('error')){
             return response()->json(['error' => 'Something was wrong'], 400);
         }
 
         $userSocialite = Socialite::driver($driver)->user();
+        dd($userSocialite);
 
-
-        
         $social_profile = SocialProfile::where('social_id', $userSocialite->getId())
         ->where('social_name', $driver)->first();
 

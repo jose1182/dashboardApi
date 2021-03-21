@@ -26,7 +26,6 @@ Route::get('testing', function(){
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('auth/{driver}/redirect', 'App\Http\Controllers\UserController@redirectToProvider');
-    
     Route::get('auth/{driver}/callback', 'App\Http\Controllers\UserController@handleProviderCallback');
     
 });
