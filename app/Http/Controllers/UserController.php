@@ -103,7 +103,7 @@ class UserController extends Controller
         if(!$social_profile){
 
             $user = User::where('email', $userSocialite->getEmail())->first();
-            dd($user);
+
             if(!$user){
                 $user = User::create([
                     'name' => $userSocialite->getName(),
@@ -111,7 +111,7 @@ class UserController extends Controller
                     'password' => Hash::make('password'),
                 ]);
             }
-
+            dd($user);
             SocialProfile::create([
                 'user_id' -> $user->id,
                 'social_id' -> $userSocialite->getId(),
