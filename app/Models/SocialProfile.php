@@ -12,7 +12,7 @@ class SocialProfile extends Model
         'user_id',
         'social_id',
         'social_name',
-        'social_name'
+        'social_avatar'
     ];
 
     //Relación uno a muchos inversa
