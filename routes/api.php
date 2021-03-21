@@ -31,8 +31,8 @@ Route::group(['middleware' => ['web']], function () {
     
     Route::get('auth/callback', function () {
      
-        $user = Socialite::driver('google')->user();
-        return ($user);
+        //$user = Socialite::driver('google')->user();
+        return ('ser');
         // $user->token
     });
     
