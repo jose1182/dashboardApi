@@ -26,12 +26,12 @@ Route::get('testing', function(){
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('auth/redirect', function () {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('google')->redirect();
     });
     
     Route::get('auth/callback', function () {
      
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('google')->user();
         return ($user);
         // $user->token
     });
