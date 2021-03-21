@@ -95,21 +95,21 @@ class UserController extends Controller
         }
 
         $userSocialite = Socialite::driver($driver)->user();
-    
+        
         $social_profile = SocialProfile::where('social_id', $userSocialite->getId())
-                                         ->where('social_name', $driver)->first();
+                                        ->where('social_name', $driver)->first();
+
 
         if(!$social_profile){
 
+            $user = User::where('email', $userSocialite->getEmail())->first();
 
-            $user = User::where('email', $userSocialite->getEmail())->firts();
-            dd("SDC");
             if(!$user){
                 $user = User::create([
-                        'name' => $userSocialite->getName(),
-                        'email' => $userSocialite->getEmail(),
-                        'password' => Hash::make('password'),
-                    ]);
+                    'name' => $userSocialite->getName(),
+                    'email'=> $userSocialite->getEmail(),
+                    'password' => Hash::make('password'),
+                ]);
             }
 
             SocialProfile::create([
