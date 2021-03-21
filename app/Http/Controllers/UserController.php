@@ -88,6 +88,9 @@ class UserController extends Controller
 
     //Obtain user information from socialize
     public function handleProviderCallback(Request $request, $driver){
+        
+        dd("teste");
+
 
         if($request->get('error')){
             return response()->json(['error' => 'Something was wrong'], 400);
