@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-use App\Models\socialProfiles;
+use App\Models\SocialProfile;
 
 //add class JWTSubject
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -58,7 +58,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     //Relacion uno a mucho
     public function socialProfiles(){
-        return $this->hasMany();
+        return $this->hasMany(SocialProfile::class);
     }
 
 
