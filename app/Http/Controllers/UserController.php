@@ -73,4 +73,14 @@ class UserController extends Controller
         //$token = JWTAuth::fromUser($user);
         //return response()->json(compact('user','token'),201);
     }
+
+    //Obtain user information from socialize
+    public function redirectToProvider($driver){
+        return Socialite::driver($driver)->redirect();
+    }
+
+    //Obtain user information from socialize
+    public function handleProviderCallback($driver){
+        $user = Socialite::driver($driver)->user();
+    }
 }
