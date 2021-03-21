@@ -103,7 +103,7 @@ class UserController extends Controller
         if(!$social_profile){
 
             $user = User::where('email', $userSocialite->getEmail())->first();
-
+            dd($user);
             if(!$user){
                 $user = User::create([
                     'name' => $userSocialite->getName(),
