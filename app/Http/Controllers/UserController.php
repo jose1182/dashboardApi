@@ -82,5 +82,6 @@ class UserController extends Controller
     //Obtain user information from socialize
     public function handleProviderCallback($driver){
         $user = Socialite::driver($driver)->user();
+        dd($user);
     }
 }
