@@ -95,12 +95,13 @@ class UserController extends Controller
         }
 
         $userSocialite = Socialite::driver($driver)->user();
+
+        dd($userSocialite->getEmail());
     
         $social_profile = SocialProfile::where('social_id', $userSocialite->getId())
                                          ->where('social_name', $driver)->first();
 
         if(!$social_profile){
-            dd("insdie");
             $user = User::where('email', $userSocialite->getEmail())->firts();
             dd($user);
             if(!$user){
