@@ -99,11 +99,10 @@ class UserController extends Controller
         $social_profile = SocialProfile::where('social_id', $userSocialite->getId())
                                          ->where('social_name', $driver)->first();
 
-        dd($social_profile);
-
         if(!$social_profile){
             
             $user = User::where('email', $userSocialite->getEmail())->firts();
+            dd($user);
             if(!$user){
                 $user = User::create([
                         'name' => $userSocialite->getName(),
