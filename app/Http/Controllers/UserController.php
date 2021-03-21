@@ -101,7 +101,6 @@ class UserController extends Controller
 
         if(!$social_profile){
 
-                        
             dd($social_profile);
             $user = User::where('email', $userSocialite->getEmail())->firts();
 
