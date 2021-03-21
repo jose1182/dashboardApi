@@ -118,12 +118,10 @@ class UserController extends Controller
                 'social_name' => $driver,
                 'social_avatar'  => $userSocialite->getAvatar()
             ]);      
-            
-            dd($social_profile);
         }
 
         $token = JWTAuth::fromUser($social_profile->user);
-
+dd($token);
         return response()->json(compact('token'));
         
     }
