@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
     use App\Models\User;
+    use App\Models\SocialProfile;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Hash;
     use Illuminate\Support\Facades\Validator;
@@ -76,12 +77,51 @@ class UserController extends Controller
 
     //Obtain user information from socialize
     public function redirectToProvider($driver){
+        $drivers = ['facebook', 'google'];
+
+        if(!in_array($driver, $drivers)){
+            return response()->json(['error' => $drivers . 'is not supported to login'], 400);
+        } 
+
         return Socialite::driver($driver)->redirect();
     }
 
     //Obtain user information from socialize
-    public function handleProviderCallback($driver){
-        $user = Socialite::driver($driver)->user();
-        dd($user);
+    public function handleProviderCallback(Request $request, $driver){
+
+        if($request->get('error')){
+            return response()->json(['error' => 'Something was wrong'], 400);
+        }
+
+        $userSocialite = Socialite::driver($driver)->user();
+
+
+        
+        $social_profile = SocialProfile::where('social_id', $userSocialite->getId())
+        ->where('social_name', $driver)->first();
+
+        if(!$social_profile){
+            
+            $user = User::where('email', $userSocialite->getEmail())->firts();
+            if(!$user){
+                $user = User::create([
+                        'name' => $userSocialite->getName(),
+                        'email' => $userSocialite->getEmail(),
+                        'password' => Hash::make('password'),
+                    ]);
+            }
+
+            SocialProfile::create([
+                'user_id' -> $user->id,
+                'social_id' -> $userSocialite->getId(),
+                'social_name' -> $driver,
+                'social_avatar' -> $userSocialite->getAvatar()
+            ]);                
+        }
+
+        $token = JWTAuth::fromUser($social_profile->user);
+
+        return response()->json(compact('token'));
+        
     }
 }

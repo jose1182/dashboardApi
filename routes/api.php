@@ -45,7 +45,10 @@ Route::post('login', 'App\Http\Controllers\UserController@authenticate');
 //Creamos un group para indicar cuales son las rutas que necesitan autenticación:
 Route::group(['middleware' => ['jwt.verify']], function() {
 
-    Route::post('user','App\Http\Controllers\UserController@getAuthenticatedUser');
+    // Route::post('user','App\Http\Controllers\UserController@getAuthenticatedUser');
+    Route::get('post', function(){
+        return ("hello");
+    });
 
 });
 
