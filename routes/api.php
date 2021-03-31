@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CitiesController;
+use App\Http\Controllers\WeatherController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +25,7 @@ Route::get('testing', function(){
 });
 
 
+//Rutas Login Socialite
 Route::group(['middleware' => ['web']], function () {
     Route::get('auth/{driver}/redirect', 'App\Http\Controllers\UserController@redirectToProvider');
     Route::get('auth/{driver}/callback', 'App\Http\Controllers\UserController@handleProviderCallback');
@@ -40,10 +42,15 @@ Route::post('register', 'App\Http\Controllers\UserController@register');
 Route::post('login', 'App\Http\Controllers\UserController@authenticate');
 
 
+//test
+Route::apiResource('city', CitiesController::class);
+
+
 
 //Creamos un group para indicar cuales son las rutas que necesitan autenticación:
 Route::group(['middleware' => ['jwt.verify']], function() {
-
+    
+    Route::apiResource('widget/weather', WeatherController::class);
     // Route::post('user','App\Http\Controllers\UserController@getAuthenticatedUser');
     Route::get('post', function(){
         return ("hello");

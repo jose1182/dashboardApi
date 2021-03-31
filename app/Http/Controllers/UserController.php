@@ -28,7 +28,10 @@ class UserController extends Controller
     } catch (JWTException $e) {
         return response()->json(['error' => 'could_not_create_token'], 500);
     }
-    return response()->json(compact('token'));
+
+    $user = JWTAuth::user();
+
+    return response()->json(compact('user', 'token'));
     }
 
     public function getAuthenticatedUser()
@@ -69,6 +72,7 @@ class UserController extends Controller
         //sending email verificvation
         $user->sendEmailVerificationNotification();
 
+        //send message "email verification send"
         return response()->json(['email send'],201);
 
         //$token = JWTAuth::fromUser($user);
@@ -120,9 +124,11 @@ class UserController extends Controller
             ]);      
         }
 
+        $user = JWTAuth::user();
+
         $token = JWTAuth::fromUser($social_profile->user);
         
-        return response()->json(compact('token'));
+        return response()->json(compact('user', 'token'));
         
     }
 }

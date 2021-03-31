@@ -61,5 +61,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->hasMany(SocialProfile::class);
     }
 
+    public function widgets(){
+        return $this->hasMany(WidgetWeather::class);
+    }
 
 }
