@@ -73,7 +73,7 @@ class UserController extends Controller
         $user->sendEmailVerificationNotification();
 
         //send message "email verification send"
-        return response()->json(['email send'],201);
+        return response()->json(['messager' => 'email send'],201);
 
         //$token = JWTAuth::fromUser($user);
         //return response()->json(compact('user','token'),201);
