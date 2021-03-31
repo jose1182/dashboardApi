@@ -29,6 +29,7 @@ class UserController extends Controller
         return response()->json(['error' => 'could_not_create_token'], 500);
     }
 
+    //get user authenticated
     $user = JWTAuth::user();
 
     return response()->json(compact('user', 'token'));
@@ -124,8 +125,11 @@ class UserController extends Controller
             ]);      
         }
 
-        $user = JWTAuth::user();
+        // get user authenticated
+        $user = JWTAuth::user($social_profile->user);
 
+
+        //
         $token = JWTAuth::fromUser($social_profile->user);
         
         return response()->json(compact('user', 'token'));
