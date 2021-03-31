@@ -126,13 +126,13 @@ class UserController extends Controller
         }
 
         // get user authenticated
-        $user = JWTAuth::user($social_profile->user);
+        $user = User::find($social_profile->user->id);
 
 
         //
         $token = JWTAuth::fromUser($social_profile->user);
         
-        return response()->json(compact('social_profile', 'token'));
+        return response()->json(compact('user', 'token'));
         
     }
 }
