@@ -132,7 +132,7 @@ class UserController extends Controller
         //
         $token = JWTAuth::fromUser($social_profile->user);
         
-        return response()->json(compact('user', 'token'));
+        return response()->json(compact('social_profile', 'token'));
         
     }
 }
