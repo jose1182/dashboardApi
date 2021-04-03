@@ -54,14 +54,17 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-            $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
         if($validator->fails()){
-                return response()->json($validator->errors()->toJson(), 400);
+                return response()->json(
+                    [
+                        'messages' => $validator->errors()
+                    ], 400);
         }
 
         $user = User::create([
@@ -69,7 +72,7 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
-        
+
         //sending email verificvation
         $user->sendEmailVerificationNotification();
 
@@ -129,7 +132,7 @@ class UserController extends Controller
         $user = User::find($social_profile->user->id);
 
 
-        //
+        // get token
         $token = JWTAuth::fromUser($social_profile->user);
         
         return response()->json(compact('user', 'token'));
