@@ -16,7 +16,7 @@ class VerificationController extends Controller
         if (!$user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();
         }
-    
+
         return redirect()->to('/');
     }
     
