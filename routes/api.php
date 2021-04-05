@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CitiesController;
-use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\WidgetController;
+use App\Models\Widget;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,7 +22,12 @@ use App\Http\Controllers\WeatherController;
 // });
 
 Route::get('testing', function(){
-    return (['user' => 'jose carlos']);
+        $newWidget = Widget::create([
+            'name' => 'name',
+            'param_1' => 'lsd'
+        ]);
+
+        return ($newWidget);
 });
 
 
@@ -50,11 +56,6 @@ Route::apiResource('city', CitiesController::class);
 //Creamos un group para indicar cuales son las rutas que necesitan autenticación:
 Route::group(['middleware' => ['jwt.verify']], function() {
     
-    Route::apiResource('widget/weather', WeatherController::class);
-    // Route::post('user','App\Http\Controllers\UserController@getAuthenticatedUser');
-    Route::get('post', function(){
-        return ("hello");
-    });
-
+    Route::apiResource('widget', WidgetController::class);
 });
 

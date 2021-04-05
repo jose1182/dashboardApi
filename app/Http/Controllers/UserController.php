@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
     use App\Models\User;
     use App\Models\SocialProfile;
+    use App\Models\Widget;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Hash;
     use Illuminate\Support\Facades\Validator;
@@ -32,7 +33,10 @@ class UserController extends Controller
     //get user authenticated
     $user = JWTAuth::user();
 
-    return response()->json(compact('user', 'token'));
+    //get widgets of user
+    $widget = Widget::where('user_id',"=", $user->id)->get();
+
+    return response()->json(compact('user', 'token', 'widget'));
     }
 
     public function getAuthenticatedUser()
@@ -134,8 +138,12 @@ class UserController extends Controller
 
         // get token
         $token = JWTAuth::fromUser($social_profile->user);
+
+            //get widgets of user
+        $widget = Widget::where('user_id',"=", $user->id)->get();
+
         
-        return response()->json(compact('user', 'token'));
+        return response()->json(compact('user', 'token', 'widget'));
         
     }
 }

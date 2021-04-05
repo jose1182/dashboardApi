@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Models\SocialProfile;
+use App\Models\Widget;
 
 //add class JWTSubject
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -62,7 +63,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
 
     public function widgets(){
-        return $this->hasMany(WidgetWeather::class);
+        return $this->hasMany(Widget::class)->orderBy('created_at', 'DESC');
     }
 
 }
