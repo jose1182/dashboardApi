@@ -39,10 +39,11 @@
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                     <h1>Thanks for your registration!</h1> 
-                    <a href="#" class="badge badge-primary">Home Page</a>
-         
                 </div>
 
+                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+                    <Strong><a href="http://10.0.2.15:8080/" class="badge badge-primary">Go Home Page</a></Strong>
+                </div>
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 sm:text-left">
