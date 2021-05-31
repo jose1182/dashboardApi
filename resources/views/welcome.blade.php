@@ -41,7 +41,7 @@
                     <h1>Thanks for your registration!</h1> 
                 </div>
 
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+                <div class="flex justify-center pt-8 sm:justify-content-center sm:pt-0">
                     <Strong><a href="http://10.0.2.15:8080/" class="badge badge-primary">Go Home Page</a></Strong>
                 </div>
 
